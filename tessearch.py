@@ -19,7 +19,7 @@ def get_filename(string):
     return string[string.rindex("/")+1:string.rindex(".")]
 
 
-def extrapolate(join=False, write=False):
+def extrapolate(join=False, write=False, words=False):
     """if join is True it extrapolates all the text from all the images in a single text file
     otherwise it creates a text file for each image with its file name"""
     texts = {}
@@ -28,7 +28,7 @@ def extrapolate(join=False, write=False):
         filepath = "all_texts.txt" if join else f"{remove_ext(image)}.txt"
         textrev = pytesseract.image_to_string(img)
         text = textrev[:-1]
-        texts[get_filename(image)] = text
+        texts[get_filename(image)] = text.strip(",':;.-").split() if words else text
         print(f"{image} contains the following text: \n {text}")
         if write:
             with open(filepath, 'a' if join else 'w') as f:
