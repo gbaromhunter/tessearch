@@ -12,7 +12,7 @@ images = [f"{folder_dir}/{image}" for image in os.listdir(folder_dir)]
 
 
 def remove_ext(string):
-    return string[:string.index(".")]
+    return string[:string.rindex(".")]
 
 
 def make_files(join=False):
