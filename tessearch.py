@@ -15,10 +15,12 @@ def make_files(join=False):
     texts = []
     for image in images:
         img = Image.open(image)
-        filepath = "all_texts.txt" if join else image
+        filepath = "all_texts.txt" if join else f"{image[:-4]}.txt"
         textrev = pytesseract.image_to_string(img)
         text = textrev[:-1]
         texts.append(text)
         print(f"{image} contains the following text: \n {text}")
         with open(filepath, 'a' if join else 'w') as f:
             f.write(text)
+
+make_files()
