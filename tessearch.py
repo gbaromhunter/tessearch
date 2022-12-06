@@ -28,7 +28,7 @@ def extrapolate(join=False, write=False, words=False):
         filepath = "all_texts.txt" if join else f"{remove_ext(image)}.txt"
         textrev = pytesseract.image_to_string(img)
         text = textrev[:-1]
-        texts[get_filename(image)] = text.strip(",':;.-").split() if words else text
+        texts[get_filename(image)] = text.lower().strip(",':;.-").split() if words else text
         print(f"{image} contains the following text: \n {text}")
         if write:
             with open(filepath, 'a' if join else 'w') as f:
