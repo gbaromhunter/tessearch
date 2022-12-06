@@ -12,17 +12,13 @@ images = [f"{folder_dir}/{image}" for image in os.listdir(folder_dir)]
 
 
 def make_files(join=False):
-    texts, c = [], 1
-    if join:
-        filepath = "texts.txt"
+    texts = []
     for image in images:
-        if not join:
-            filepath = f"{str(c)}.txt"
         img = Image.open(image)
+        filepath = "all_texts.txt" if join else image
         textrev = pytesseract.image_to_string(img)
         text = textrev[:-1]
         texts.append(text)
         print(f"{image} contains the following text: \n {text}")
         with open(filepath, 'a' if join else 'w') as f:
             f.write(text)
-        c += 1
