@@ -5,9 +5,9 @@ from PIL import Image
 from pytesseract import pytesseract
 import os
 
-path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+path_to_tesseract = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
 pytesseract.tesseract_cmd = path_to_tesseract
-folder_dir = r"C:\tessearch\images"
+folder_dir = r"C:/tessearch/images"
 images = [f"{folder_dir}/{image}" for image in os.listdir(folder_dir)]
 
 
