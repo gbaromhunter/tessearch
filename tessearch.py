@@ -19,6 +19,16 @@ def get_filename(string):
     return string[string.rindex("/")+1:string.rindex(".")]
 
 
+def clean_txt(txt):
+    """cleans the text from all the special characters and returns the cleaned text"""
+    txt = txt.lower()
+    set_text = set(txt)
+    for c in set_text:
+        if c not in "abcdefghijklmnopqrstuwvxyz1234567890 ":
+            txt = txt.replace(char, "")
+    return txt
+
+
 def extrapolate(join=False, write=False, words=False):
     """if join is True it extrapolates all the text from all the images in a single text file
     otherwise it creates a text file for each image with its file name"""
@@ -28,7 +38,7 @@ def extrapolate(join=False, write=False, words=False):
         filepath = "all_texts.txt" if join else f"{remove_ext(image)}.txt"
         textrev = pytesseract.image_to_string(img)
         text = textrev[:-1]
-        texts[get_filename(image)] = text.lower().strip(",':;.-").split() if words else text # needs to be fixed
+        texts[get_filename(image)] = clean_txt(text).split() if words else text
         print(f"{image} contains the following text: \n {text}")
         if write:
             with open(filepath, 'a' if join else 'w') as f:
