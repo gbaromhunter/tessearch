@@ -15,7 +15,7 @@ def remove_ext(string):
     return string[:string.rindex(".")]
 
 
-def get_filename(string):
+def isolate_filename(string):
     return string[string.rindex("/")+1:string.rindex(".")]
 
 
@@ -25,7 +25,7 @@ def clean_txt(txt):
     set_text = set(txt)
     for c in set_text:
         if c not in "abcdefghijklmnopqrstuwvxyz1234567890 ":
-            txt = txt.replace(char, "")
+            txt = txt.replace(c, "")
     return txt
 
 
